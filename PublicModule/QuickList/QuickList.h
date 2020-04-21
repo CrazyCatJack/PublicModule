@@ -42,6 +42,20 @@ typedef struct QuickListNode{
 
 
 /**
+ * QuickList_for_each_entry_safe - traverse all QuickList on safe status
+ * @pHead[in]:	QuickList HEAD node
+ * @node[in]:	QuickList node pointer
+ * @node2[in]:  QuickList node pointer2
+ *
+ * traverse all QuickList, could delete or detach node in this loop
+ *
+ */
+#define QuickList_for_each_entry_safe(pHead, node, node2) \
+	for (node = pHead->next, node2 = node->next; node != pHead; node = node2, node2 = node->next)
+
+
+
+/**
  * QuickList_entry - get QuickList node userdata
  * @type[in]:	userdata type
  * @node[in]:	QuickList node pointer
@@ -94,7 +108,7 @@ int QuickListGetNodeSum(QuickListNode_T *pHead);
  *
  * Return: 0 on success; -1 on parameter failed
  */
-int QuickListAddNodePos(QuickListNode_T *newNode, QuickListNode_T *pos);
+int QuickListAddNodePos(QuickListNode_T *pos, QuickListNode_T *newNode);
 
 
 /**
@@ -106,7 +120,7 @@ int QuickListAddNodePos(QuickListNode_T *newNode, QuickListNode_T *pos);
  *
  * Return: 0 on success; -1 on parameter failed
  */
-int QuickListAddNodetoTail(QuickListNode_T *newNode, QuickListNode_T *pHead);
+int QuickListAddNodetoTail(QuickListNode_T *pHead, QuickListNode_T *newNode);
 
 
 /**
@@ -118,7 +132,7 @@ int QuickListAddNodetoTail(QuickListNode_T *newNode, QuickListNode_T *pHead);
  *
  * Return: 0 on success; -1 on parameter failed
  */
-int QuickListAddNodetoHead(QuickListNode_T *newNode, QuickListNode_T *pHead);
+int QuickListAddNodetoHead(QuickListNode_T *pHead, QuickListNode_T *newNode);
 
 
 /**
@@ -152,6 +166,43 @@ int QuickListDeleteNodefromHead(QuickListNode_T *pHead);
  * Return: 0 on success; -1 on parameter failed
  */
 int QuickListDeleteNodefromTail(QuickListNode_T *pHead);
+
+
+/**
+ * QuickListDetachNode - detach the specify QuickList node 
+ * @detNode[in]:	the node need to be detachd
+ * NOTE: @detNode Couldn't be pHead node
+ *
+ * just detach the specify QuickList node, do not free it memory
+ *
+ * Return: !=NULL on success, the specify detached node; NULL on parameter failed
+ */
+QuickListNode_T *QuickListDetachNode(QuickListNode_T *pHead, QuickListNode_T *detNode);
+
+
+
+/**
+ * QuickListDetachNodefromHead - detach the QuickList node after HEAD
+ * @pHead[in]:	the QuickList HEAD node 
+ *
+ * detach the QuickList node after HEAD, do not free it memory
+ *
+ * Return: !=NULL on success, the specify detached node; NULL on parameter failed
+ */
+QuickListNode_T *QuickListDetachNodefromHead(QuickListNode_T *pHead);
+
+
+
+/**
+ * QuickListDetachNodefromTail - detach the QuickList node after tail
+ * @pHead[in]:	the QuickList HEAD node 
+ *
+ * detach the QuickList node after tail, do not free it memory
+ *
+ * Return: !=NULL on success, the specify detached node; NULL on parameter failed
+ */
+QuickListNode_T *QuickListDetachNodefromTail(QuickListNode_T *pHead);
+
 
 
 /**
