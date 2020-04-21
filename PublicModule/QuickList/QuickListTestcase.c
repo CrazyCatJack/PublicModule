@@ -45,7 +45,7 @@ int main(int argc, char *argv)
 			printf("create QuickList node fail!\n");
 			goto __exit;
 		}
-		if (0 != QuickListAddNodetoTail(newNode, pHead)) {
+		if (0 != QuickListAddNodetoTail(pHead, newNode)) {
 			printf("add QuickList node to list fail!\n");
 			goto __exit;
 		}

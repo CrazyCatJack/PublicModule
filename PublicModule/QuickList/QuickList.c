@@ -53,7 +53,7 @@ int QuickListGetNodeSum(QuickListNode_T *pHead)
 
 
 
-int QuickListAddNodePos(QuickListNode_T *newNode, QuickListNode_T *pos)
+int QuickListAddNodePos(QuickListNode_T *pos, QuickListNode_T *newNode)
 {
 	if (newNode == NULL || pos == NULL) {
 		return -1;
@@ -69,7 +69,7 @@ int QuickListAddNodePos(QuickListNode_T *newNode, QuickListNode_T *pos)
 	return 0;
 }
 
-int QuickListAddNodetoTail(QuickListNode_T *newNode, QuickListNode_T *pHead)
+int QuickListAddNodetoTail(QuickListNode_T *pHead, QuickListNode_T *newNode)
 {
 	if (newNode == NULL || pHead == NULL) {
 		return -1;
@@ -85,7 +85,7 @@ int QuickListAddNodetoTail(QuickListNode_T *newNode, QuickListNode_T *pHead)
 	return 0;
 }
 
-int QuickListAddNodetoHead(QuickListNode_T *newNode, QuickListNode_T *pHead)
+int QuickListAddNodetoHead(QuickListNode_T *pHead, QuickListNode_T *newNode)
 {
 	if (newNode == NULL || pHead == NULL) {
 		return -1;
@@ -134,6 +134,42 @@ int QuickListDeleteNodefromTail(QuickListNode_T *pHead)
 	
 	return QuickListDeleteNode(pHead->previous);
 }
+
+
+QuickListNode_T *QuickListDetachNode(QuickListNode_T *pHead, QuickListNode_T *detNode)
+{
+	if (detNode == NULL && detNode == pHead) {
+		return NULL;
+	}
+
+	detNode->previous->next = detNode->next;
+	detNode->next->previous = detNode->previous;
+	detNode->next = NULL;
+	detNode->previous = NULL;
+
+	return detNode;
+}
+
+
+QuickListNode_T *QuickListDetachNodefromHead(QuickListNode_T *pHead)
+{
+	if (pHead == NULL || pHead->next == pHead) {
+		return NULL;
+	}
+	
+	return QuickListDetachNode(pHead, pHead->next);
+}
+
+
+QuickListNode_T *QuickListDetachNodefromTail(QuickListNode_T *pHead)
+{
+	if (pHead == NULL || pHead->next == pHead) {
+		return NULL;
+	}
+	
+	return QuickListDetachNode(pHead, pHead->previous);
+}
+
 
 int QuickListMakeEmptyList(QuickListNode_T *pHead)
 {
