@@ -1,6 +1,6 @@
 /*
   Priority queue source file
-  (C) 2021  xuri <ri.xu@tcl.com>
+  (C) 2021  xuri <xuri_tomcat@foxmail.com>
   
   This program is priority queue functions description based on binary heap.
 
