@@ -1,6 +1,6 @@
 /*
   Priority queue testcase
-  (C) 2021  xuri <ri.xu@tcl.com>
+  (C) 2021  xuri <xuri_tomcat@foxmail.com>
   
   This program is priority queue testcase.
 
